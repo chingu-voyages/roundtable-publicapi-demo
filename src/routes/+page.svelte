@@ -6,8 +6,8 @@
   let isDefinitionFound = false 
   let isSearchTextError = false
   let isError = false
-  let errorMessage
 
+  let errorMessage
   const ERR_INVALID_SEARCH_TEXT = "Please enter a single word to search for before clicking 'Get Definition'"
   const ERR_API_ERROR = "An error occurred in the API. Error: "
 
@@ -18,7 +18,7 @@
     }
   }
 
-  const validateSearchFor = () => {
+  const validateSearchWord = () => {
     isError = false
     if (searchFor === null || searchFor === undefined || searchFor === '') {
       isError = true
@@ -37,7 +37,7 @@
 
   const searchForDefinition = async () => {
     isDefinitionFound = false
-    validateSearchFor()
+    validateSearchWord()
     if (isSearchTextError) {
       return
     }
