@@ -5,10 +5,7 @@
   let definitionFromAPI
   let isSearchTextError = false
   let isDefinitionFound = false
-  let isDefinitionNotFound = false
   let isAPIError = false
-
-  const NO_DEFINITION_FOUND = 'No Definitions Found'
 
   const captureKeystroke = (event) => {
     isSearchTextError = false
@@ -21,10 +18,8 @@
     isAPIError = false
     isSearchTextError = false
     isDefinitionFound = false
-    isDefinitionNotFound = false
     if (searchFor === null || searchFor === undefined || searchFor === '') {
       isSearchTextError = true
-      isDefinitionNotFound = true
       return
     }
 
@@ -35,23 +30,20 @@
     }
   }
 
-  const searchForDefinition = () => {
+  const searchForDefinition = async () => {
     validateSearchFor()
     if (isSearchTextError) {
       return
     }
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${ searchFor }`)
-      .then((response) => response.json())
-      .then((data) => {
-        definitionFromAPI = data
-        if (data.title === NO_DEFINITION_FOUND) {
+      .then(async (response) => {
+        definitionFromAPI = await response.json()
+        if (response.status === 404) {
           isDefinitionFound = false
-          isDefinitionNotFound = true
           return
         }
         isDefinitionFound = true
-        isDefinitionNotFound = false
-        console.log(data)
+        console.log('response: ', response, ' \ndefinitionFromAPI: ', definitionFromAPI)
       })
       .catch((error) => {
         console.log('Error: ', error)
@@ -100,7 +92,7 @@
         </div>
       {/if}
 
-      {#if isDefinitionNotFound}
+      {#if !isDefinitionFound && definitionFromAPI !== undefined}
         <div class="pt-4 pb-4 text-red-500">
           { definitionFromAPI.message }
         </div>
