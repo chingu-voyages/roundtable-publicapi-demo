@@ -1,10 +1,15 @@
 <script>
   import Header from '$lib/header.svelte'
 
-  let searchFor = 'slither'
+  let searchFor = ''
+  let isError = false
 
   const validateSearchFor = (event) => {
-    
+    console.log('Event: ', event.key)
+    if (!searchFor) {
+      const searchWords = searchFor.split(' ')
+      isError = (searchWords.length === 1) ? true : false
+    }
   }
 
   const searchForDefinition = () => {
@@ -39,10 +44,17 @@
       <label for="searchFor">
         Search for the definition of:
         <input class="border w-32" id="searchFor" name="searchFor" type="search"
-        bind:value={ searchFor } on:input={ searchFor } on:click={ validateSearchFor }>
+        bind:value={ searchFor } on:input={ searchFor } on:keydown={ validateSearchFor }>
       </label>
+
+      {#if isError} 
+        <div class="pt-4 pb-4 text-red-500">
+          Please enter a word to search for before clicking 'Get Definition'
+        </div>
+      {/if}
+
       <div class="flex flex-col items-center mt-4 w-1/6 bg-green-500 border rounded-lg">
-        <button class="font-bold" on:click={ searchForDefinition }>Checkout</button>
+        <button class="font-bold" on:click={ searchForDefinition }>Get Definition</button>
       </div>
     </div>
   </div>
