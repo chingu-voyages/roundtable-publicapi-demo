@@ -2,10 +2,14 @@
   import Header from '$lib/header.svelte'
 
   let searchFor = ''
-  let definitionFromAPI
+  let wordDefinition
+  let isDefinitionFound = false 
   let isSearchTextError = false
-  let isDefinitionFound = false
-  let isAPIError = false
+  let isError = false
+  let errorMessage
+
+  const ERR_INVALID_SEARCH_TEXT = "Please enter a single word to search for before clicking 'Get Definition'"
+  const ERR_API_ERROR = "An error occurred in the API. Error: "
 
   const captureKeystroke = (event) => {
     isSearchTextError = false
@@ -15,39 +19,43 @@
   }
 
   const validateSearchFor = () => {
-    isAPIError = false
-    isSearchTextError = false
-    isDefinitionFound = false
+    isError = false
     if (searchFor === null || searchFor === undefined || searchFor === '') {
-      isSearchTextError = true
+      isError = true
+      errorMessage = ERR_INVALID_SEARCH_TEXT
       return
     }
 
     const searchWords = searchFor.split(' ')
     isSearchTextError = (searchWords.length === 1) ? false : true
-    if (isSearchTextError) {
+    if (isSearchTextError) { // Search text must be exactly one word
+      isError = true
+      errorMessage = ERR_INVALID_SEARCH_TEXT
       return
     }
   }
 
   const searchForDefinition = async () => {
+    isDefinitionFound = false
     validateSearchFor()
     if (isSearchTextError) {
       return
     }
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${ searchFor }`)
       .then(async (response) => {
-        definitionFromAPI = await response.json()
+        wordDefinition = await response.json()
         if (response.status === 404) {
           isDefinitionFound = false
+          isError = true
+          errorMessage = wordDefinition.message
           return
         }
         isDefinitionFound = true
-        console.log('response: ', response, ' \ndefinitionFromAPI: ', definitionFromAPI)
+        console.log('response: ', response, ' \nwordDefinition: ', wordDefinition)
       })
       .catch((error) => {
-        console.log('Error: ', error)
-        isAPIError = true
+        isError = true
+        errorMessage = ERR_API_ERROR.concat(error)
       })
   }
 </script>
@@ -80,21 +88,9 @@
         bind:value={ searchFor } on:input={ searchFor } on:keydown={ captureKeystroke }>
       </label>
 
-      {#if isSearchTextError} 
+      {#if isError}
         <div class="pt-4 pb-4 text-red-500">
-          Please enter a word to search for before clicking 'Get Definition'
-        </div>
-      {/if}
-
-      {#if isAPIError}
-        <div class="pt-4 pb-4 text-red-500">
-          An error occurred trying to locate your word.
-        </div>
-      {/if}
-
-      {#if !isDefinitionFound && definitionFromAPI !== undefined}
-        <div class="pt-4 pb-4 text-red-500">
-          { definitionFromAPI.message }
+          { errorMessage }
         </div>
       {/if}
 
@@ -103,7 +99,7 @@
       </div>
 
       {#if isDefinitionFound}
-        {#each definitionFromAPI as definition}
+        {#each wordDefinition as definition}
           {#each definition.meanings as meaning, index }
             <div class="flex flex-col mt-4 mb-4">
               <div class="font-bold">
