@@ -24,6 +24,7 @@
     isDefinitionNotFound = false
     if (searchFor === null || searchFor === undefined || searchFor === '') {
       isSearchTextError = true
+      isDefinitionNotFound = true
       return
     }
 
@@ -46,8 +47,10 @@
         if (data.title === NO_DEFINITION_FOUND) {
           isDefinitionFound = false
           isDefinitionNotFound = true
+          return
         }
         isDefinitionFound = true
+        isDefinitionNotFound = false
         console.log(data)
       })
       .catch((error) => {
