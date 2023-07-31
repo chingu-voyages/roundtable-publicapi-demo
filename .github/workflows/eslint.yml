@@ -15,13 +15,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14  # You can specify the Node.js version required for your project
+          node-version: 14 # You can specify the Node.js version required for your project
 
       - name: Install dependencies
-        run: npm install  # or use yarn if your project uses Yarn
+        run: npm install # or use yarn if your project uses Yarn
 
       - name: Prettier
-        run: npx prettier --write **/*.js 
+        run: npm run format
 
       - name: Run ESLint
-        run: npm run lint  # Adjust this command according to how you run ESLint in your project
+        run: npm run lint # Adjust this command according to how you run ESLint in your project
