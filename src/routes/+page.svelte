@@ -1,6 +1,8 @@
 <script>
 	import Header from '$lib/header.svelte';
 
+	/* this is an incomplete comment
+
 	let searchFor = '';
 	let wordDefinition;
 	let isDefinitionFound = false;
