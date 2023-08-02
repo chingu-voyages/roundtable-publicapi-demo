@@ -12,6 +12,7 @@
 		"Please enter a single word to search for before clicking 'Get Definition'";
 	const ERR_API_ERROR = 'An error occurred in the API. Error: ';
 
+	/* Intercept presses of the Enter key */
 	const captureKeystroke = (event) => {
 		isSearchTextError = false;
 		if (event.key === 'Enter') {
