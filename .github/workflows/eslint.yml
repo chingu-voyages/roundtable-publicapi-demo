@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: npm install # or use yarn if your project uses Yarn
 
-#      - name: Prettier
-#        run: npm run format
+      - name: Prettier
+        run: npm run format
 
 #      - name: Run ESLint
 #        run: npm run lint # Adjust this command according to how you run ESLint in your project
