@@ -1,4 +1,4 @@
-name: Lint
+name: RoundtableWF
 
 on:
   pull_request:
@@ -26,9 +26,5 @@ jobs:
 #      - name: Run ESLint
 #        run: npm run lint # Adjust this command according to how you run ESLint in your project
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
-        with:
-          # Enable linters
-          eslint: true
-          prettier: true
+      - name: eslint
+        uses: bradennapier/eslint-plus-action@v3.4.2
