@@ -1,6 +1,8 @@
 <script>
 	import Header from '$lib/header.svelte';
 
+	/* Create a syntax error
+
 	let searchFor = '';
 	let wordDefinition;
 	let isDefinitionFound = false;
@@ -69,7 +71,7 @@
 	<div class="mt-4 text-xl">
 		This app was built to provide a test platform to show how to use a public API in your web apps.
 		It utilizes the <a
-			class="underline italic text-blue-500"
+			class="italic text-blue-500 underline"
 			target="_blank noreferrer"
 			href="https://dictionaryapi.dev/">Free Dictionary API</a
 		> to retrieve word definitions.
@@ -77,7 +79,7 @@
 	<div class="mt-4 text-xl">
 		This will be referenced in an upcoming weekly Chingu Roundtable in our
 		<a
-			class="underline italic text-blue-500"
+			class="italic text-blue-500 underline"
 			target="_blank noreferrer"
 			href="https://www.youtube.com/playlist?list=PLmnPfbM4_HyszkLRkLtlUgoMCHer3jpg7"
 			>YouTube channel.</a
@@ -93,7 +95,7 @@
 			<label for="searchFor">
 				Search for the definition of:
 				<input
-					class="pl-1 border w-32"
+					class="w-32 pl-1 border"
 					id="searchFor"
 					name="searchFor"
 					type="search"
@@ -110,7 +112,7 @@
 			{/if}
 
 			<div
-				class="flex flex-col items-center mt-4 w-1/6 bg-green-500 border border-black rounded-lg"
+				class="flex flex-col items-center w-1/6 mt-4 bg-green-500 border border-black rounded-lg"
 			>
 				<button class="font-bold" on:click={searchForDefinition}>Get Definition</button>
 			</div>
