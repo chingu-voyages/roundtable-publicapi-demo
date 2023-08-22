@@ -1,4 +1,4 @@
-name: ESLint
+name: RoundtableWF
 
 on:
   pull_request:
@@ -23,5 +23,8 @@ jobs:
       - name: Prettier
         run: npm run format
 
-      - name: Run ESLint
-        run: npm run lint # Adjust this command according to how you run ESLint in your project
+#      - name: Run ESLint
+#        run: npm run lint # Adjust this command according to how you run ESLint in your project
+
+      - name: eslint
+        uses: bradennapier/eslint-plus-action@v3.4.2
