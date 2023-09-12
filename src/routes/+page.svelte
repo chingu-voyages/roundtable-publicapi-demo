@@ -1,8 +1,6 @@
 <script>
 	import Header from '$lib/header.svelte';
 
-	/* Create a syntax error
-
 	let searchFor = '';
 	let wordDefinition;
 	let isDefinitionFound = false;
@@ -77,15 +75,6 @@
 			href="https://dictionaryapi.dev/">Free Dictionary API</a
 		> to retrieve word definitions.
 	</div>
-	<div class="mt-4 text-xl">
-		This will be referenced in an upcoming weekly Chingu Roundtable in our
-		<a
-			class="italic text-blue-500 underline"
-			target="_blank noreferrer"
-			href="https://www.youtube.com/playlist?list=PLmnPfbM4_HyszkLRkLtlUgoMCHer3jpg7"
-			>YouTube channel.</a
-		>
-	</div>
 </section>
 
 <!-- Mock Checkout Form -->
@@ -94,7 +83,7 @@
 	<div class="mt-4 ml-8 text-lg">
 		<div class="mt-4">
 			<label for="searchFor">
-				Search for the definition of:
+				Search for the definite of:
 				<input
 					class="w-32 pl-1 border"
 					id="searchFor"
