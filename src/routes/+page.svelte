@@ -26,7 +26,6 @@
 	const countWords = () => {
 		wordCount = 0
 		searchFor = searchFor.trim()
-		console.log(searchFor)
 		let lastSpace = 0
 		let charNo = 0
 		for (; charNo < searchFor.length; charNo++) {
@@ -72,7 +71,6 @@
 					return;
 				}
 				isDefinitionFound = true;
-				console.log('response: ', response, ' \nwordDefinition: ', wordDefinition);
 			})
 			.catch((error) => {
 				isError = true;
