@@ -90,7 +90,7 @@
 	<div class="mt-4 ml-8 text-lg">
 		<div class="mt-4">
 			<label for="searchFor">
-				Search for the definite of:
+				Search for the definition of:
 				<input
 					class="w-32 pl-1 border"
 					id="searchFor"
