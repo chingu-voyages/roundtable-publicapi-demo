@@ -24,17 +24,8 @@
 
 	// Count the number of words in the search box
 	const countWords = () => {
-		wordCount = 0
 		searchFor = searchFor.trim()
-		let lastSpace = 0
-		let charNo = 0
-		for (; charNo < searchFor.length; charNo++) {
-			if (charNo > 0 && searchFor.charAt(charNo) === ' ') {
-				++wordCount
-				lastSpace = charNo
-			}
-		}
-		if (lastSpace < charNo) ++wordCount
+		wordCount = searchFor.split(' ').length
 	}
 
 	const validateSearchWord = () => {
