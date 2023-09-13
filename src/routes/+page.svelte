@@ -6,6 +6,7 @@
 	let isDefinitionFound = false;
 	let isSearchTextError = false;
 	let isError = false;
+	let wordCount = 0
 
 	let errorMessage;
 	const ERR_INVALID_SEARCH_TEXT =
@@ -16,9 +17,26 @@
 	const captureKeystroke = (event) => {
 		isSearchTextError = false;
 		if (event.key === 'Enter') {
+			countWords()
 			searchForDefinition();
 		}
 	};
+
+	// Count the number of words in the search box
+	const countWords = () => {
+		wordCount = 0
+		searchFor = searchFor.trim()
+		console.log(searchFor)
+		let lastSpace = 0
+		let charNo = 0
+		for (; charNo < searchFor.length; charNo++) {
+			if (charNo > 0 && searchFor.charAt(charNo) === ' ') {
+				++wordCount
+				lastSpace = charNo
+			}
+		}
+		if (lastSpace < charNo) ++wordCount
+	}
 
 	const validateSearchWord = () => {
 		isError = false;
@@ -93,6 +111,13 @@
 					on:input={searchFor}
 					on:keydown={captureKeystroke}
 				/>
+
+				{#if wordCount > 0}
+					<span>
+						No. Words: 
+						{ wordCount }
+					</span>
+				{/if}
 			</label>
 
 			{#if isError}
